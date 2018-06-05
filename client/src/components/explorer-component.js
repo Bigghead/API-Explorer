@@ -9,6 +9,7 @@ class explorerComponent extends Component {
             body    : {},
             response: {}
         };
+        this.responseTextRef =  React.createRef();
     }
 
 
@@ -82,9 +83,12 @@ class explorerComponent extends Component {
         
         try { 
 
-            const query = await fetch( url, options );
+            const query = await fetch( 'https://jsonplaceholder.typicode.com/posts', { method: 'GET'} );
             const response = await query.json();
             console.log(response);
+
+            // ===== Prettying up JSON response in textarea ===== //
+            this.responseTextRef.current.value = JSON.stringify(response, undefined, 4);
 
         } catch(e) { console.log(e); }
     }
@@ -112,7 +116,12 @@ class explorerComponent extends Component {
 
                 <div className='response-text'>
                     <label htmlFor="api-response">Response:</label>
-                    <textarea name="api-response" id="api-response" cols="20" rows="10"></textarea>
+                    <textarea 
+                        name="api-response" 
+                        id="api-response" 
+                        cols="20" 
+                        rows="10"
+                        ref={ this.responseTextRef }></textarea>
                 </div>
             </div>
         );
