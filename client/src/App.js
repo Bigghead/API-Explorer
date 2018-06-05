@@ -8,7 +8,7 @@ class App extends Component {
 
     state = {
         title: 'Add new user',
-        url: 'https://jsonplaceholder.typicode.com/',
+        url: 'https://jsonplaceholder.typicode.com/posts',
         method: 'POST',
         body: [
           {

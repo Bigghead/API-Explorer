@@ -20,7 +20,7 @@ class explorerComponent extends Component {
         this.props.body.forEach( body => {
             inputVals[body.name] = ''
         } );
-        return this.setState( { state: inputVals } )
+        return this.setState( { ...inputVals } )
     }
 
 
@@ -63,16 +63,23 @@ class explorerComponent extends Component {
 
     submitForm = async(e) =>  {
         e.preventDefault();
+        console.log(typeof this.state.phone)
         const { title, method, url, body } = this.props;
         const inputVals = { ...this.state };
         
         let options = method === 'GET' || method === 'DELETE'
                     ? { method }  
-                    : { method, body: JSON.stringify( { ...inputVals } )} ;
+                    : { method, 
+                        body: JSON.stringify( { ...inputVals } ),
+                        headers: {
+                            'content-type': 'application/json'
+                          }
+                      };
         
         try { 
 
-            const response = await fetch( url, options );
+            const query = await fetch( url, options );
+            const response = await query.json();
             console.log(response);
 
         } catch(e) { console.log(e); }
