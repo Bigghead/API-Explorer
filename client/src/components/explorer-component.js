@@ -85,7 +85,6 @@ class explorerComponent extends Component {
 
             const query = await fetch( url, options );
             const response = await query.json();
-            console.log(response);
             this.setState( { response } );
 
             // ===== Prettying up JSON response in textarea ===== //
@@ -122,7 +121,8 @@ class explorerComponent extends Component {
                         id="api-response" 
                         cols="20" 
                         rows="10"
-                        ref={ this.responseTextRef }></textarea>
+                        ref={ this.responseTextRef }
+                        readOnly='true'></textarea>
                 </div>
             </div>
         );
