@@ -31,32 +31,7 @@ class App extends Component {
                     pattern: '\\d\\d\\d-\\d\\d\\d\\d',
                   },
                 ]
-              }, 
-              {
-                title: 'Get users',
-                url: 'https://jsonplaceholder.typicode.com/posts',
-                method: 'GET',
-              },
-              {
-                title: 'Put new user',
-                url: 'https://jsonplaceholder.typicode.com/posts/1',
-                method: 'PUT',
-                body: [
-                  {
-                    name: 'age',
-                    type: 'number',
-                    max: 100,
-                    min: 0,
-                    required: true
-                  },
-                  {
-                    name: 'full-name',
-                    type: 'text',
-                    placeholder: 'John Doe',
-                    required: true,
-                  },
-                ]
-              }, 
+            }
         ]
     }
 

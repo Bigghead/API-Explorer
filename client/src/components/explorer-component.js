@@ -50,7 +50,7 @@ class explorerComponent extends Component {
                 </label>
                 <input 
                     id={ b.name + index } 
-                    key={ b.name + index } 
+                    key={ b.name + index }
                     { ...attributes }
                     onChange={ this.handleInputChange.bind( this, b.name )} />
             </Fragment>
@@ -100,7 +100,7 @@ class explorerComponent extends Component {
             <div className='api-explorer'>
                 <form className='api-form' onSubmit={ this.submitForm }>
                     <h4>{ title }</h4>
-                    <h5>{ method }</h5>
+                    <h5 style={ { color: 'red'} }>{ method }</h5>
                     <h5>Base URL</h5>
                     <p>{ url } </p>
 

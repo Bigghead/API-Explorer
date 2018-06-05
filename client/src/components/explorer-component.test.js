@@ -85,7 +85,7 @@ test('should change state on input changes', () => {
 test("should not submit invalid form submission", () => {
     const submitForm = jest.spyOn(Explorer.instance(), 'submitForm')
 
-    Explorer.find('form').simulate('submit', { preventDefault() {} });
+    Explorer.find('form').simulate('submit', { preventDefault: () => {} });
     expect(submitForm).toHaveBeenCalledTimes(0);
 });
 
