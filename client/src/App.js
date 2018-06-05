@@ -26,7 +26,7 @@ class App extends Component {
           {
             name: 'phone',
             type: 'tel',
-            pattern: '/\d\d\d-\d\d\d\d/',
+            pattern: '\\d\\d\\d-\\d\\d\\d\\d',
           },
         ]
       }

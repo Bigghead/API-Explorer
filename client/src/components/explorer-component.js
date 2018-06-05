@@ -35,7 +35,8 @@ class explorerComponent extends Component {
 
 
     mapBody = ( body ) => ( body.map( ( b, index ) => {
-        const attributes = { ...b }
+        const attributes = { ...b };
+
         return ( 
             <Fragment key={ b.name + index }> 
                 <label 
@@ -63,7 +64,6 @@ class explorerComponent extends Component {
 
     submitForm = async(e) =>  {
         e.preventDefault();
-        console.log(typeof this.state.phone)
         const { title, method, url, body } = this.props;
         const inputVals = { ...this.state };
         
@@ -89,21 +89,28 @@ class explorerComponent extends Component {
     render() {
         const { title, method, url, body } = this.props;
         return (
-            <form className='api-form' onSubmit={ this.submitForm }>
-                <h4>{ title }</h4>
-                <h5>{ method }</h5>
-                <h5>Base URL</h5>
-                <p>{ url } </p>
-    
-                <Fragment>
-                    { ( body && body.length > 0 )
-                        ? this.renderBody( body )
-                        : null
-                    }
-                </Fragment>
+            <div className='api-explorer'>
+                <form className='api-form' onSubmit={ this.submitForm }>
+                    <h4>{ title }</h4>
+                    <h5>{ method }</h5>
+                    <h5>Base URL</h5>
+                    <p>{ url } </p>
 
-                <button type='submit'>Send Request</button>
-            </form>
+                    <Fragment>
+                        { (body && body.length > 0)
+                            ? this.renderBody(body)
+                            : null
+                        }
+                    </Fragment>
+
+                    <button type='submit'>Send Request</button>
+                </form>
+
+                <div className='response-text'>
+                    <label htmlFor="api-response">Response:</label>
+                    <textarea name="api-response" id="api-response" cols="20" rows="10"></textarea>
+                </div>
+            </div>
         );
     }
 };
