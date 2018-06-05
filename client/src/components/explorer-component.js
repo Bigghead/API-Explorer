@@ -43,7 +43,11 @@ class explorerComponent extends Component {
                     className={ b.required ? 'required-field' : ''} > 
                     { this.uppercaseLabel( b.name) }: 
                 </label>
-                <input id={ b.name + index } key={ b.name + index } { ...attributes } />
+                <input 
+                    id={ b.name + index } 
+                    key={ b.name + index } 
+                    { ...attributes }
+                    onChange={ this.handleInputChange.bind( this, b.name )} />
             </Fragment>
         )
     } ) );
@@ -52,10 +56,33 @@ class explorerComponent extends Component {
     uppercaseLabel = ( label ) => label.charAt(0).toUpperCase() + label.slice(1);
 
 
+    handleInputChange( fieldName, { target: { value } } ) {
+        this.setState( { [fieldName] : value } );
+    }
+
+
+    submitForm = async(e) =>  {
+        e.preventDefault();
+        const { title, method, url, body } = this.props;
+        const inputVals = { ...this.state };
+        
+        let options = method === 'GET' || method === 'DELETE'
+                    ? { method }  
+                    : { method, body: JSON.stringify( { ...inputVals } )} ;
+        
+        try { 
+
+            const response = await fetch( url, options );
+            console.log(response);
+
+        } catch(e) { console.log(e); }
+    }
+
+
     render() {
         const { title, method, url, body } = this.props;
         return (
-            <form className='api-form'>
+            <form className='api-form' onSubmit={ this.submitForm }>
                 <h4>{ title }</h4>
                 <h5>{ method }</h5>
                 <h5>Base URL</h5>
@@ -67,6 +94,8 @@ class explorerComponent extends Component {
                         : null
                     }
                 </Fragment>
+
+                <button type='submit'>Send Request</button>
             </form>
         );
     }
