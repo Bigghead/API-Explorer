@@ -1,0 +1,13 @@
+.api-form {
+    margin: 10px 20px;
+}
+
+.form-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-body > input {
+    margin: 10px 0;
+    width: 50%;
+}

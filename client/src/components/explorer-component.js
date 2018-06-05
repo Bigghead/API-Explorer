@@ -5,26 +5,34 @@ const explorerComponent = ({ title, method, url, body }) => {
 
     const renderBody = () => {
         return (
-            <Fragment>
-                <h4>Body</h4>
+            <div className='form-body'>
+                <h5>Body</h5>
                 { mapBody() }
-            </Fragment>
+            </div>
         );
     }
 
 
 
-    const mapBody = () => (body.map((b, index) => {
+    const mapBody = () => ( body.map( ( b, index ) => {
         const attributes = { ...b }
-        return <input key={ index } { ...attributes } />
-    }));
+        return ( 
+            <Fragment>
+                <label htmlFor={ b.name + index } > { uppercaseLabel( b.name) }: </label>
+                <input id={ b.name + index } key={ b.name + index } { ...attributes } />
+            </Fragment>
+        )
+    } ) );
+
+
+    const uppercaseLabel = ( label ) => label.charAt(0).toUpperCase() + label.slice(1);
 
 
     return (
-        <div>
-            <h3>{ title }</h3>
-            <h4>{ method }</h4>
-            <h4>Base URL</h4>
+        <form className='api-form'>
+            <h4>{ title }</h4>
+            <h5>{ method }</h5>
+            <h5>Base URL</h5>
             <p>{ url } </p>
 
             <Fragment>
@@ -33,7 +41,7 @@ const explorerComponent = ({ title, method, url, body }) => {
                     : null
                 }
             </Fragment>
-        </div>
+        </form>
     );
 };
 
