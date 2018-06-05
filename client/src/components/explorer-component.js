@@ -3,6 +3,26 @@ import React, { Fragment, Component } from 'react';
 class explorerComponent extends Component {
 
 
+    constructor( props ) {
+        super( props );
+        this.state = { };
+    }
+
+
+    componentDidMount() {
+        this.buildStateFromPropsBody();
+    }
+
+
+    buildStateFromPropsBody = () => {
+        const inputVals = {};
+        if ( !this.props.body ) return ;
+        this.props.body.forEach( body => {
+            inputVals[body.name] = ''
+        } );
+        return this.setState( { state: inputVals } )
+    }
+
 
     renderBody = ( body ) => {
         return (
@@ -17,7 +37,7 @@ class explorerComponent extends Component {
     mapBody = ( body ) => ( body.map( ( b, index ) => {
         const attributes = { ...b }
         return ( 
-            <Fragment>
+            <Fragment key={ b.name + index }> 
                 <label 
                     htmlFor={ b.name + index }
                     className={ b.required ? 'required-field' : ''} > 
