@@ -1,30 +1,38 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-const explorerComponent = ( { title, method, url, body } ) => {
+const explorerComponent = ({ title, method, url, body }) => {
 
 
-    const mapBody = () => {
-        return body.map( b => { 
-            console.log(b)
-            return <input type={ b.type }/>
-        } )
+    const renderBody = () => {
+        return (
+            <Fragment>
+                <h4>Body</h4>
+                { mapBody() }
+            </Fragment>
+        );
     }
 
-    console.log(title)
+
+
+    const mapBody = () => (body.map((b, index) => {
+        const attributes = { ...b }
+        return <input key={ index } { ...attributes } />
+    }));
+
+
     return (
         <div>
             <h3>{ title }</h3>
             <h4>{ method }</h4>
             <h4>Base URL</h4>
             <p>{ url } </p>
-            <>
-                { body.length > 0 ? 
-                    <h4>Body</h4>
-                    { mapBody() }
 
+            <Fragment>
+                { body.length > 0
+                    ? renderBody()
                     : null
                 }
-            </>
+            </Fragment>
         </div>
     );
 };
