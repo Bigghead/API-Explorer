@@ -5,7 +5,10 @@ class explorerComponent extends Component {
 
     constructor( props ) {
         super( props );
-        this.state = { };
+        this.state = { 
+            body    : {},
+            response: {}
+        };
     }
 
 
@@ -20,7 +23,7 @@ class explorerComponent extends Component {
         this.props.body.forEach( body => {
             inputVals[body.name] = ''
         } );
-        return this.setState( { ...inputVals } )
+        return this.setState( { body: { ...inputVals } } );
     }
 
 
@@ -58,14 +61,15 @@ class explorerComponent extends Component {
 
 
     handleInputChange( fieldName, { target: { value } } ) {
-        this.setState( { [fieldName] : value } );
+        const newState = {...this.state.body, [fieldName] : value };
+        this.setState( { body : newState } );
     }
 
 
     submitForm = async(e) =>  {
         e.preventDefault();
         const { title, method, url, body } = this.props;
-        const inputVals = { ...this.state };
+        const inputVals = { ...this.state.body };
         
         let options = method === 'GET' || method === 'DELETE'
                     ? { method }  
