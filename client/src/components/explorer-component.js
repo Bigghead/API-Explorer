@@ -83,9 +83,10 @@ class explorerComponent extends Component {
         
         try { 
 
-            const query = await fetch( 'https://jsonplaceholder.typicode.com/posts', { method: 'GET'} );
+            const query = await fetch( url, options );
             const response = await query.json();
             console.log(response);
+            this.setState( { response } );
 
             // ===== Prettying up JSON response in textarea ===== //
             this.responseTextRef.current.value = JSON.stringify(response, undefined, 4);

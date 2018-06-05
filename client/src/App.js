@@ -7,40 +7,79 @@ import ExplorerComponent from './components/explorer-component';
 class App extends Component {
 
     state = {
-        title: 'Add new user',
-        url: 'https://jsonplaceholder.typicode.com/posts',
-        method: 'POST',
-        body: [
-          {
-            name: 'email',
-            type: 'email',
-            max: 24,
-            min: 3,
-          },
-          {
-            name: 'full-name',
-            type: 'text',
-            placeholder: 'John Doe',
-            required: true,
-          },
-          {
-            name: 'phone',
-            type: 'tel',
-            pattern: '\\d\\d\\d-\\d\\d\\d\\d',
-          },
+        configs: [
+            {
+                title: 'Add new user',
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                method: 'POST',
+                body: [
+                  {
+                    name: 'email',
+                    type: 'email',
+                    max: 24,
+                    min: 3,
+                  },
+                  {
+                    name: 'full-name',
+                    type: 'text',
+                    placeholder: 'John Doe',
+                    required: true,
+                  },
+                  {
+                    name: 'phone',
+                    type: 'tel',
+                    pattern: '\\d\\d\\d-\\d\\d\\d\\d',
+                  },
+                ]
+              }, 
+              {
+                title: 'Get users',
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                method: 'GET',
+              },
+              {
+                title: 'Put new user',
+                url: 'https://jsonplaceholder.typicode.com/posts/1',
+                method: 'PUT',
+                body: [
+                  {
+                    name: 'age',
+                    type: 'number',
+                    max: 100,
+                    min: 0,
+                    required: true
+                  },
+                  {
+                    name: 'full-name',
+                    type: 'text',
+                    placeholder: 'John Doe',
+                    required: true,
+                  },
+                ]
+              }, 
         ]
-      }
+    }
+
+
+    mapConfigComponent = () => (
+        this.state.configs.map( ( { title, method, url, body }, index ) => {
+            return <ExplorerComponent
+                key={ title + index}
+                title={ title }
+                method={ method }
+                url={ url }
+                body={ body }
+                />
+        } )
+    );
+
+
+
     render() {
 
-        const { title, method, url, body } = this.state;
         return (
             <div className="App">
-                <ExplorerComponent
-                    title={ title }
-                    method={ method }
-                    url={ url }
-                    body={ body }
-                />
+                { this.mapConfigComponent() }
             </div>
         );
     }
