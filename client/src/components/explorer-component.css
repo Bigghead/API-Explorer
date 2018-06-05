@@ -11,3 +11,8 @@
     margin: 10px 0;
     width: 50%;
 }
+
+.required-field::after {
+    content: "*";
+    color: red;
+}
